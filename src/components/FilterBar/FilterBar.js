@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Row, Col, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-
+import './filterBar.sass'
 class FilterBar extends Component {
 	constructor(props) {
 		super(props);
@@ -31,10 +31,10 @@ filterRole = (event) => {
 
 filterStatus = () => {
 	const {update, initialData} = this.props;
+	console.log(initialData)
 	const filter = initialData.filter(employer => {
 		return (employer.role.includes(this.props.role) && employer.isArchive === !this.props.checked)
 	})
-	console.log(filter)
 	update({
 		data: filter,
 		checked: !this.props.checked
@@ -46,8 +46,8 @@ render() {
 	return(
 		<Row >
 			<Col sm="12">
-			<div>
-			<Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+			<div className="filterBar">
+			<Dropdown className="filterBar-role" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
 				<DropdownToggle caret>
 					Фильтр по должности
 				</DropdownToggle>
@@ -57,8 +57,10 @@ render() {
 					<DropdownItem onClick = {this.filterRole}>Cook</DropdownItem>
 				</DropdownMenu>
     </Dropdown>
-				<input id="archive" type="checkbox" onChange={this.filterStatus}></input>
-				<label htmlFor="archive">Архив</label>
+				<div className="filterBar-status">
+					<input className="filterBar-status-input" id="archive" type="checkbox" onChange={this.filterStatus}></input>
+					<label className="filterBar-status-input-label"htmlFor="archive">Архив</label>
+				</div>
 				
 			</div>
 			</Col>

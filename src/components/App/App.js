@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import './App.css';
+import './App.sass';
 import axios from 'axios';
 import UserList from '../UserList/UserList'
 import { Container, Row, Col } from 'reactstrap';
 import SortBar from '../SortBar/SortBar';
 import FilterBar from '../FilterBar/FilterBar';
+import ModalWindow from '../ModalWindow/ModalWindow';
+
 
 class App extends Component {
 	constructor(props) {
@@ -14,33 +16,30 @@ class App extends Component {
 			checked: false,
 			role: ""
 		};
-		
 		axios.get('./employers.json').then((response) => {
-
 			this.initialData = response.data;
 			const filter = response.data.filter(employer => {
 				return employer.isArchive === this.state.checked;
 			});
+
 			this.setState({
 				data: filter
 			});
 		});
 	}
 	updateData(config) {
-		this.setState(config)
+		this.setState(config);
 }
-
   render() {
     return (
-				<Container>
-					<SortBar  data={this.state.data }  update={this.updateData.bind(this)}/>
-					<FilterBar  data={this.state.data } initialData={this.initialData }  update={this.updateData.bind(this)} checked={this.state.checked} role={this.state.role}/>
-					<Row>
-						<Col xs = "3" sm = "8">
-						<UserList data={this.state.data}/>
-						</Col>
-						</Row>
-				</Container>
+					 <Container className="app">
+								<div className="bars">
+									<SortBar  data={this.state.data }  update={this.updateData.bind(this)}/>
+									<FilterBar  data={this.state.data } initialData={this.initialData }  update={this.updateData.bind(this)} checked={this.state.checked} role={this.state.role}/>
+									<ModalWindow data={this.state.data} update={this.updateData.bind(this)} initialData={this.initialData } checked={this.state.checked} />
+								</div>
+								<UserList data={this.state.data} initialData={this.initialData } update={this.updateData.bind(this)} checked={this.state.checked}/>
+					 </Container>
 				);
   }
 }

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import {Row, Col, Button } from 'reactstrap';
+import {Button } from 'reactstrap';
+import { Row, Col } from 'reactstrap';
+import './sortBar.sass'
 
 class SortBar extends Component {
 	constructor(props) {
@@ -35,12 +37,15 @@ render() {
 	return(
 		<Row>
 			<Col sm="12">
-			<div>
-			<Button color="secondary" onClick= {() => this.sort('name')}>Сортировать по имени</Button>
-			<Button color="secondary" onClick= {() => this.sort('birthday')}>Сортировать по дате рождения</Button>
+			<div className="sortBar">
+				<Button className="sortBar-btn" color="secondary" onClick= {() => this.sort('name')}>Сортировать по имени</Button>
+				<Button className="sortBar-btn" color="secondary" onClick= {() => this.sort('birthday')}>Сортировать по дате рождения</Button>
 			</div>
-			</Col>
-		</Row>
+		</Col>
+	</Row>
+		
+			
+		
 	)
 }
 }
