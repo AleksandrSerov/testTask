@@ -3,8 +3,6 @@ import { Modal, ModalHeader, ModalBody, FormGroup, Label, Input, Button} from 'r
 import { Formik }  from 'formik';
 import MaskedInput from 'react-text-mask'
 import BasicFormSchema from '../BasicFormSchema/BasicFormSchema';
-import {Router, Route, Link, Switch} from 'react-router-dom';
-
 import './modalWindow.sass';
 
 
@@ -24,9 +22,7 @@ class ModalWindow extends Component {
 	render() {
 		return (
 			<div className="addNewEmp">
-				<Link to="/addnewuser">
 				<Button  color="secondary" onClick={this.toggle}> Добавить нового сотрудника </Button>
-				</Link>
 				<Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
 						<ModalHeader toggle={this.toggle}>Добавить нового сотрудника</ModalHeader>
 						<ModalBody>
@@ -38,7 +34,8 @@ class ModalWindow extends Component {
 								isArchive: false
 							}}
 							validationSchema={BasicFormSchema}
-							onSubmit={(values, { setSubmitting }) => {
+							onSubmit={(values) => {
+								this.toggle();
 								const {update, initialData} = this.props;
 								const addEmp = {
 									id: initialData.length+1,
@@ -126,9 +123,9 @@ class ModalWindow extends Component {
 											onChange={handleChange}
 											onBlur={handleBlur}
 											className={errors.role && touched.role ? 'text-input error' : 'text-input'} >
-												<option value="driver">Driver</option>
-												<option value="waiter">Waiter</option>
-												<option value="cook">Cook</option>
+												<option value="driver">Водитель</option>
+												<option value="waiter">Официант</option>
+												<option value="cook">Повар</option>
 										</Input>
 										{errors.role &&	touched.role && <div className="input-feedback">{errors.role}</div>}
 									</FormGroup>

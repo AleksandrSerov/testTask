@@ -2,12 +2,10 @@ import React, { Component } from 'react';
 import './App.sass';
 import axios from 'axios';
 import UserList from '../UserList/UserList'
-import { Container, Row, Col } from 'reactstrap';
+import { Container} from 'reactstrap';
 import SortBar from '../SortBar/SortBar';
 import FilterBar from '../FilterBar/FilterBar';
 import ModalWindow from '../ModalWindow/ModalWindow';
-
-
 class App extends Component {
 	constructor(props) {
 		super(props);

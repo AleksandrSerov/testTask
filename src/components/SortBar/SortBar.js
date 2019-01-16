@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import {Button } from 'reactstrap';
+import { Button } from 'reactstrap';
 import { Row, Col } from 'reactstrap';
 import './sortBar.sass'
 
 class SortBar extends Component {
 	constructor(props) {
 		super(props);
-		this.sorted = {name: true, age: true};
+		this.sorted = {
+			name: true, 
+			age: true};
 	}
 	sort(type) {
 		const {update, data} = this.props;
@@ -31,14 +33,13 @@ class SortBar extends Component {
 		update({
 			data: sorted
 		});
-		console.log(sorted);
 	}
 render() {
 	return(
 		<Row>
 			<Col sm="12">
 			<div className="sortBar">
-				<Button className="sortBar-btn" color="secondary" onClick= {() => this.sort('name')}>Сортировать по имени</Button>
+			  <Button className="sortBar-btn" color="secondary" onClick= {() => this.sort('name')}>Сортировать по имени</Button>
 				<Button className="sortBar-btn" color="secondary" onClick= {() => this.sort('birthday')}>Сортировать по дате рождения</Button>
 			</div>
 		</Col>

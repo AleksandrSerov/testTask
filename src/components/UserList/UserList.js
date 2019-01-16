@@ -15,17 +15,20 @@ const UserList = ( {data, initialData, update, checked} ) => {
 		checked={checked}  />
 	);
 	return (
-		<Table hover responsive size="sm" className="userList">
-		<thead >
-				<tr>
-						<th>Имя</th>
-						<th>Должность</th>
-						<th>Номер телефона</th>
-						<th>Дата рождения</th>
-				</tr>
-		</thead>
-		<tbody>{items}</tbody>
-</Table>
+		<>
+			<h3>Сотрудники</h3>
+			<Table hover responsive size="sm" className="userList">
+			<thead>
+					<tr>
+							<th>Имя</th>
+							<th>Должность</th>
+							<th>Номер телефона</th>
+							<th>Дата рождения</th>
+					</tr>
+			</thead>
+			<tbody>{items}</tbody>
+	</Table>
+		</>
 	)
 }
 export default UserList;

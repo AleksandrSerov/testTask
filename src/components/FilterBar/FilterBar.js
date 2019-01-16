@@ -18,7 +18,7 @@ class FilterBar extends Component {
 
 filterRole = (event) => {
 	const {update, initialData} = this.props;
-	const role = event.target.textContent.toLowerCase();
+	const role = event.target.value;
 	const filter = initialData.filter(employer => {
 		return (employer.role.includes(role) && employer.isArchive === this.props.checked)
 	})
@@ -31,7 +31,6 @@ filterRole = (event) => {
 
 filterStatus = () => {
 	const {update, initialData} = this.props;
-	console.log(initialData)
 	const filter = initialData.filter(employer => {
 		return (employer.role.includes(this.props.role) && employer.isArchive === !this.props.checked)
 	})
@@ -52,9 +51,10 @@ render() {
 					Фильтр по должности
 				</DropdownToggle>
 				<DropdownMenu >
-					<DropdownItem onClick = {this.filterRole}>Driver</DropdownItem>
-					<DropdownItem onClick = {this.filterRole}>Waiter</DropdownItem>
-					<DropdownItem onClick = {this.filterRole}>Cook</DropdownItem>
+				 <DropdownItem onClick = {this.filterRole} value="">Сбросить</DropdownItem>
+					<DropdownItem onClick = {this.filterRole} value="driver">Водитель</DropdownItem>
+					<DropdownItem onClick = {this.filterRole} value="waiter">Официант</DropdownItem>
+					<DropdownItem onClick = {this.filterRole} value="cook">Повар</DropdownItem>
 				</DropdownMenu>
     </Dropdown>
 				<div className="filterBar-status">

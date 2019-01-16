@@ -23,12 +23,34 @@ class ListItem extends Component {
   this.setState({
 			showModal: !this.state.showModal
 		});
-	 console.log(this.state.showModal);
 	}
 	render() {
-		return (
+		let role = '';
+		switch (this.props.item.role) {
+			case 'driver':
+				role = 'Водитель';
+				break;
+			case 'cook':
+				role = 'Повар';
+				break;
+			case 'waiter':
+				role = 'Официант';
+				break;
+			default:
+			role = 'undefined'; 
+		}
+
+	return (
 			<>
-			<Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+			
+    <tr onClick={this.toggle}>
+					<td>{this.props.item.name}</td>
+					<td>{role}</td>
+					<td>{this.props.item.phone}</td>
+					<td>{this.props.item.birthday}</td>
+	   </tr>
+
+				<Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
     <ModalHeader toggle={this.toggle}>Редактировать данные</ModalHeader>
    <ModalBody>
 			<Formik
@@ -40,10 +62,9 @@ class ListItem extends Component {
 							isArchive: this.props.item.isArchive
 						}}
 						validationSchema={BasicFormSchema}
-
       onSubmit={(values, { setSubmitting }) => {
+							this.toggle();
 							const {update, initialData} = this.props;
-
 							const addEmp = {
 								id: this.props.item.id,
 								name: values.name,
@@ -57,9 +78,9 @@ class ListItem extends Component {
 				    return employer.isArchive === this.props.checked;
 			    });				
 								update({
-		       data: filter,
+									data: filter
 	       });
-      }}
+						}}
 
     >
       {props => {
@@ -136,9 +157,9 @@ class ListItem extends Component {
 												className={
                 errors.role && touched.role ? 'text-input error' : 'text-input'
               } >
-														<option value="driver">Driver</option>
-														<option value="waiter">Waiter</option>
-														<option value="cook">Cook</option>
+														<option value="driver">Водитель</option>
+														<option value="waiter">Официант</option>
+														<option value="cook">Повар</option>
              </Input>
 														 {errors.role &&
               touched.role && <div className="input-feedback">{errors.role}</div>}
@@ -166,20 +187,12 @@ class ListItem extends Component {
             <Button type="submit" disabled={isSubmitting}>
               Подтвердить изменения
             </Button>
-
-            
           </form>
         );
       }}
     </Formik>
    </ModalBody>
    </Modal>
-    <tr onClick={this.toggle}>
-					<td>{this.props.item.name}</td>
-					<td>{this.props.item.role}</td>
-					<td>{this.props.item.phone}</td>
-					<td>{this.props.item.birthday}</td>
-	   </tr>
 			</>
 		)
 	}
